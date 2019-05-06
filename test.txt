@@ -1,5 +1,5 @@
 version 1.0
 test commit.
 
-version 1.1
-checkout for czy, and update test.txt to commit.
+version 1.2
+checkout for wxz, and update test.txt to commit.
