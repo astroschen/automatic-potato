@@ -1,2 +1,5 @@
 version 1.0
 test commit.
+
+version 1.2
+checkout for wxz, and update test.txt to commit.
