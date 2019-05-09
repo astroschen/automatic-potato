@@ -31,7 +31,7 @@ public class GetBingPicture {
     }
 
     public void savePicture() throws IOException {
-        String path = "F:\\test";
+        String path = "F:\\下载\\bing壁纸";
         String homeUrl = "http://cn.bing.com";
         String imgInfoUrl = "https://cn.bing.com/HPImageArchive.aspx?format=xml&idx=0&n=1";
         String infoxml = doGet(imgInfoUrl);
@@ -40,43 +40,35 @@ public class GetBingPicture {
         String imgUrl = parseElementFromRoot(root, "url");
         String imgName = parseElementFromRoot(root, "fullstartdate");
         InputStream fis = null;
-        ByteArrayOutputStream outStream = null;
-        FileOutputStream out = null;
+        OutputStream os = null;
         try {
             URL url = new URL(homeUrl + imgUrl);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setConnectTimeout(3000);
+            connection.setDoInput(true);
             connection.setRequestMethod("GET");
             connection.connect();
             if (connection.getResponseCode() == 200) {
                 fis = connection.getInputStream();
-                outStream = new ByteArrayOutputStream();
-                byte[] bits = new byte[2048];
+                byte[] bits = new byte[1024];
                 int leng = 0;
-                while ((leng = fis.read(bits)) > 0) {
-                    outStream.write(bits, 0, leng);
+                os = new FileOutputStream(path + "\\"+imgName+".jpg");
+                while ((leng = fis.read(bits)) != -1) {
+                    os.write(bits, 0, leng);
                 }
-                File desc = new File(path + "\\"+imgName+".jpg");
-                out = new FileOutputStream(desc);
-                out.write(bits);
             }
-            if (fis == null) {
+            if (fis != null) {
                 fis.close();
             }
-            if (outStream == null) {
-                outStream.close();
-            }
-            if (out == null) {
-                out.close();
+            if (os != null) {
+                os.close();
             }
         } catch (Exception e) {
-            if (fis == null) {
+            if (fis != null) {
                 fis.close();
             }
-            if (outStream == null) {
-                outStream.close();
-            }
-            if (out == null) {
-                out.close();
+            if (os != null) {
+                os.close();
             }
         }
 
