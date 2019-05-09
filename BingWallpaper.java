@@ -13,7 +13,7 @@ public class BingWallpaper {
      *  targetFile 目标文件夹
      *  sourceFile 源文件夹
      */
-    private static String targetFile = "F:\\bing壁纸";
+    private static String targetFile = "F:\\下载\\bing壁纸";
     private static String sourceFile = "C:\\Users\\MSI-PC\\AppData\\Local\\Packages\\Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy\\LocalState\\Assets";
 
     public static void main(String[] args) {
